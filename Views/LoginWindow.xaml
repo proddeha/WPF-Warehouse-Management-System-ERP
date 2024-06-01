@@ -1,0 +1,190 @@
+﻿<Window x:Class="NvvmFinal.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NvvmFinal.Views"
+        mc:Ignorable="d"
+        Title="LoginWindow" 
+                Height="550" Width="800"
+        WindowStyle="None" 
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <!-- WindowStyle="None" : αφαιρει τα minimize , maximize και exit κουμπια
+         ResizeMode="NoResize" : δεν αφηνει το resize του window
+        WindowStartupLocation="CenterScreen" : εμφανιζει το παραθυρο στην μεση
+        MouseDown="Window_MouseDown" : εφτιαξε ενα onClick eventListener οπου
+    οταν κανεις leftClick , σερνει το παραθυρο
+        Background="Transparent" : Σε συνδιασμο με το Border , κανει τις γωνιες
+    πιο smooth. Ουσιαστικα κανει Transparent το χρωμα του Main window και ετσι
+    δεν αφηνει τις γωνιες να φανουν
+    -->
+    <Border CornerRadius="12">
+        <Border.Background>
+            <ImageBrush ImageSource="C:\Users\Kwstas\source\repos\WpfTest\images\back-image.jpg"/>
+        </Border.Background>
+        <Border CornerRadius="10"
+            BorderThickness="1"
+            Opacity="0.95">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#000000" Offset="0.03"/>
+                    <GradientStop Color="#121107" Offset="0.15"/>
+                    <GradientStop Color="#302e12" Offset="0.35"/>
+                    <GradientStop Color="#545120" Offset="0.75"/>
+                    <GradientStop Color="#827d17" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#000000" Offset="0.03"/>
+                    <GradientStop Color="#121107" Offset="0.15"/>
+                    <GradientStop Color="#302e12" Offset="0.35"/>
+                    <GradientStop Color="#545120" Offset="0.75"/>
+                    <GradientStop Color="#827d17" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30">
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="LOGIN"
+                               Foreground="DarkGray"
+                               FontSize="18"
+                               FontFamily="Montserrat"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="15,5,0,0"/>
+                    <Button x:Name="btnMinimize"
+                            Background="#3d8f4e"
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="AliceBlue"
+                            FontSize="18"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimize_Click"
+                            Margin="0,0,5,0" HorizontalAlignment="Right" Width="25"
+                            >
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="25" Height="25"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                      />
+                                </Border>
+
+
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button x:Name="btnClose"
+                            Background="#8f3d3d"
+                            BorderThickness="0"
+                            Content="x"
+                            Foreground="AliceBlue"
+                            FontSize="14"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnClose_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="25" Height="25"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <StackPanel Width="250"
+                            Orientation="Vertical" Margin="274,53,274,-518"
+                            >
+                    <Image Source="C:\Users\Kwstas\source\repos\WpfTest\images\Logo2.png"
+                           Height="250"
+                           Width="250"/>
+                    <TextBlock Text="Username :"
+                               FontSize="18"
+                               Foreground="AliceBlue"
+                               Margin="5,0,0,0"
+                               FontFamily="Montserrat"/>
+                    <TextBox x:Name="txtUsername"
+                             Margin="5,5,0,0"
+                             FontWeight="Medium"
+                             Foreground="AliceBlue"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,1"
+                             Height="25"
+                             VerticalContentAlignment="Center"
+                             Padding="25,0,0,0"
+                             >
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="C:\Users\Kwstas\source\repos\WpfTest\images\user4.png" Stretch="None" AlignmentX="Left"/>
+                        </TextBox.Background>
+
+                    </TextBox>
+                    <TextBlock Text="Password :"
+                               FontSize="18"
+                               Foreground="AliceBlue"
+                               Margin="5,15,0,0"
+                               FontFamily="Montserrat"/>
+                    <PasswordBox x:Name="txtPassword"
+                             Margin="5,5,0,0"
+                             FontWeight="Medium"
+                             Foreground="AliceBlue"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,1"
+                             Height="25"
+                             VerticalContentAlignment="Center"
+                             Padding="25,0,0,0">
+                        <PasswordBox.Background>
+                            <ImageBrush ImageSource="C:\Users\Kwstas\source\repos\WpfTest\images\key.png" Stretch="None" AlignmentX="Left"/>
+                        </PasswordBox.Background>
+
+                    </PasswordBox>
+                    <Button x:Name="enterBtn"
+                            Cursor="Hand"
+                            Click="enterBtn_Click"
+                            Height="50"
+                            Width="160"
+                            Margin="0,50,0,0"
+                            Content="Enter"
+                            Foreground="AliceBlue"
+                            FontSize="18"
+                            Background="#662d10"
+                            BorderThickness="0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="160" Height="40"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+                </StackPanel>
+
+
+            </Grid>
+
+        </Border>
+    </Border>
+
+
+</Window>

@@ -1,0 +1,395 @@
+﻿<Window x:Class="NvvmFinal.Views.Additions.NewSale"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NvvmFinal"
+        mc:Ignorable="d"
+        Title="DetailsCustomer" 
+        Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+
+        >
+    <Border CornerRadius="20"
+           BorderThickness="0"
+           Opacity="1"
+           Background="#f5f2e6">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#000000" Offset="0.03"/>
+                <GradientStop Color="#121107" Offset="0.15"/>
+                <GradientStop Color="#302e12" Offset="0.35"/>
+                <GradientStop Color="#545120" Offset="0.75"/>
+                <GradientStop Color="#827d17" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="10"
+                   Grid.Row="0"
+                   BorderThickness="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="15"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Height="30"
+                               Background="Transparent"
+                               x:Name="closeBtn"
+                               Click="closeBtn_Click"
+                               BorderThickness="0"
+                           Grid.Column="4">
+                        <Image Source="\images\close3.png" Stretch="None"/>
+                    </Button>
+                    <Button Height="30"
+                               x:Name="mnmzBtn"
+                               Click="mnmzBtn_Click"
+                               BorderThickness="0"
+                           Grid.Column="2"
+                           FontWeight="Heavy"
+                           Cursor="Hand"
+                           Background="Transparent">
+                        <Image Source="\images\minimize3.png" Stretch="None"/>
+                    </Button>
+
+                </Grid>
+            </Border>
+            <Border Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" Height="60" Grid.ColumnSpan="2">
+                        <Image Source="\images\user4.png" 
+                              Stretch="None"
+                              Margin="100,0,0,0"/>
+                        <TextBlock  Height="60" 
+                                   Text="New Sale For :" 
+                                   VerticalAlignment="Center" 
+                                  HorizontalAlignment="Center" 
+                                  Padding="10,17,0,0"
+                                  FontFamily="Times New Roman"
+                                  FontSize="24">
+                        </TextBlock>
+                        <TextBlock x:Name="fullNameBlock" Height="60" Text="" 
+                                   VerticalAlignment="Center" 
+                                  HorizontalAlignment="Center" 
+                                  Padding="10,17,0,0"
+                                  FontFamily="Times New Roman"
+                                  FontSize="24"
+                                  FontWeight="Bold">
+                        </TextBlock>
+
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+            <Border Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Border CornerRadius="10"
+                           Grid.Column="1"
+                           BorderThickness="1"
+                           Background="#e8e5d8">
+                        <Border>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="280"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Margin="20,10,0,0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Category :"
+                                              FontSize="20"
+                                              Foreground="#1b1c1c"
+                                              Margin="15,10,0,0"
+                                              FontFamily="Times New Roman">
+
+                                            </TextBlock>
+                                            <ComboBox x:Name="categoryCB"
+                                                FontSize="18"
+                                                Foreground="#1b1c1c"
+                                                Height="30"
+                                                Width="150"
+                                                HorizontalAlignment="Left"
+                                                Margin="15,10,0,10"
+                                                Background="Transparent"
+                                                Padding="5,0,0,0"
+                                                FontWeight="DemiBold"
+                                                SelectionChanged="categoryCB_SelectionChanged">
+                                            </ComboBox>
+                                            <TextBlock Text="Product Name :"
+                                              FontSize="20"
+                                              Foreground="#1b1c1c"
+                                              Margin="15,10,0,0"
+                                              FontFamily="Times New Roman">
+
+                                            </TextBlock>
+                                            <ComboBox x:Name="productCb"
+                                                FontSize="18"
+                                                Foreground="#1b1c1c"
+                                                Height="30"
+                                                Width="250"
+                                                HorizontalAlignment="Left"
+                                                Margin="15,10,0,10"
+                                                Background="Transparent"
+                                                Padding="5,0,0,0"
+                                                FontWeight="DemiBold" SelectionChanged="productCb_SelectionChanged">
+                                            </ComboBox>
+
+
+                                            <TextBlock Text="Quantity :"
+                                              FontSize="20"
+                                              Foreground="#1b1c1c"
+                                              Margin="15,10,0,0"
+                                              FontFamily="Times New Roman">
+
+                                            </TextBlock>
+                                            <TextBox x:Name="quantity"
+                                                FontSize="18"
+                                                Foreground="#1b1c1c"
+                                                Height="30"
+                                                Width="50"
+                                                HorizontalAlignment="Left"
+                                                Margin="15,10,0,10"
+                                                Background="AliceBlue"
+                                                Padding="5,0,0,0"
+                                                FontWeight="DemiBold"
+                                                >
+                                            </TextBox>
+
+                                        </StackPanel>
+
+
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="Shipping Method :"
+                                              FontSize="20"
+                                              Foreground="#1b1c1c"
+                                              Margin="15,10,0,0"
+                                              FontFamily="Times New Roman">
+
+                                            </TextBlock>
+
+                                            <ComboBox x:Name="shippingCb"
+                                                FontSize="18"
+                                                Foreground="#1b1c1c"
+                                                Height="30"
+                                                Width="210"
+                                                HorizontalAlignment="Left"
+                                                Margin="15,10,0,10"
+                                                Background="Transparent"
+                                                Padding="5,0,0,0"
+                                                FontWeight="DemiBold" SelectionChanged="shippingCb_SelectionChanged">
+                                            </ComboBox>
+                                            <TextBlock Text="Shipping Cost :"
+                                              FontSize="20"
+                                              Foreground="#1b1c1c"
+                                              Margin="15,10,0,0"
+                                              FontFamily="Times New Roman">
+
+                                            </TextBlock>
+
+                                            <TextBlock x:Name="shippingCostBlk"
+                                                FontSize="18"
+                                                Foreground="#1b1c1c"
+                                                Height="30"
+                                                HorizontalAlignment="Left"
+                                                Margin="15,10,0,10"
+                                                Background="Transparent"
+                                                Padding="5,0,0,0"
+                                                FontWeight="DemiBold">
+                                            </TextBlock>
+                                            <TextBlock Text="Total Cost* :"
+                                              x:Name="TotalCost"
+                                              FontSize="20"
+                                              Foreground="#1b1c1c"
+                                              Margin="15,10,0,0"
+                                              FontFamily="Times New Roman"
+                                              >
+                                                <TextBlock.ToolTip>
+                                                    <ToolTip>
+                                                        <TextBlock>
+                                                    <Run Text="Included Tax :"/>
+                                                    <Run Text="{Binding TotalCostt}"/>
+                                                    <Run Text="$"/>
+                                                        </TextBlock>
+                                                    </ToolTip>
+
+                                                </TextBlock.ToolTip>
+                                            </TextBlock>
+
+                                            <TextBlock x:Name="totalCostBlk"
+                                                FontSize="18"
+                                                Foreground="#1b1c1c"
+                                                Height="30"
+                                                HorizontalAlignment="Left"
+                                                Margin="15,10,0,10"
+                                                Background="Transparent"
+                                                Padding="5,0,0,0"
+                                                FontWeight="DemiBold"
+                                                >
+                                            </TextBlock>
+                                        </StackPanel>
+
+
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center">
+                                        <Button
+                                            Height="30"
+                                            Width="200" Click="Button_Click">
+                                            <StackPanel  Orientation="Horizontal" Width="160" >
+                                                <fa:IconImage Icon="CartShopping" Width="15" Height="15" Foreground="AliceBlue"/>
+                                                <TextBlock Text="ADD TO CART" VerticalAlignment="Center" Margin="30,0,0,0"
+                                                       FontFamily="Times New Roman"
+                                                       FontSize="13"
+                                                       Foreground="AliceBlue"/>
+                                            </StackPanel>
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Width="200" Height="30"
+                                                    CornerRadius="6"
+                                                    Background="#1b1c1c"
+                                                     >
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+
+                                                </ControlTemplate>
+
+                                            </Button.Template>
+                                        </Button>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <DataGrid x:Name="ViewGrid" 
+                                                 Foreground="Black"
+                                                BorderThickness="0"
+                                                 Background="#e8e5d8"
+                                                 Margin="15,15,15,15"
+                                                 Width="900"
+                                                 Height="320"
+                                                 HorizontalAlignment="Left"
+                                                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                                 CanUserAddRows="True"
+                                                 HeadersVisibility="Column" 
+                                                 CurrentCellChanged="ViewGrid_CurrentCellChanged">
+
+                                            <DataGrid.Resources>
+                                                <Style TargetType="{x:Type DataGridRow}">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="FontSize" Value="18"/>
+                                                    <Setter Property="MinHeight" Value="40"/>
+                                                    <Setter Property="MinWidth" Value="100"/>
+                                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+
+                                                </Style>
+                                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="FontSize" Value="20"/>
+                                                    <Setter Property="FontWeight" Value="Medium"/>
+                                                    <Setter Property="BorderBrush" Value="Black"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,1,1.5"/>
+                                                    <Setter Property="MinWidth" Value="180"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                                                </Style>
+                                                <Style TargetType="{x:Type DataGridCell}">
+                                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                                    <Setter Property="Margin" Value="0,10,0,0"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                                                    <Setter Property="MaxWidth" Value="300"/>
+                                                </Style>
+
+
+                                            </DataGrid.Resources>
+                                        </DataGrid>
+                                        <Button Height="30" 
+                                                Width="30" 
+                                                VerticalAlignment="Top"
+                                                Margin="10,50,0,0"
+                                                Content="X"
+                                                x:Name="deleteRow"
+                                                Click="deleteRow_Click"
+                                                Foreground="AliceBlue">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Width="30" Height="30"
+                                                    CornerRadius="8"
+                                                    Background="#1b1c1c"
+                                                     >
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+
+                                                </ControlTemplate>
+
+                                            </Button.Template>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Border>
+                </Grid>
+            </Border>
+            <Border Grid.Row="3">
+                <Button x:Name="order"
+                    Height="50"
+                    Width="200"
+                    Click="order_Click">
+                    <StackPanel  Orientation="Horizontal" Width="160" >
+                        <fa:IconImage Icon="Check" Width="15" Height="15" Foreground="AliceBlue"/>
+                        <TextBlock Text="COMPLETE ORDER" VerticalAlignment="Center" Margin="10,0,0,0"
+                                                       FontFamily="Times New Roman"
+                                                       FontSize="15"
+                                                       Foreground="AliceBlue"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="200" Height="40"
+                                            CornerRadius="6"
+                                            Background="#1b1c1c"
+                                            >
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+
+                        </ControlTemplate>
+
+                    </Button.Template>
+
+                </Button>
+
+            </Border>
+        </Grid>
+    </Border>
+</Window>

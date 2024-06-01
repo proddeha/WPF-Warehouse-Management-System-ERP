@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\back-image.jpg" />
+    <None Remove="Images\close.png" />
+    <None Remove="Images\close2.png" />
+    <None Remove="Images\close3.png" />
+    <None Remove="Images\key.png" />
+    <None Remove="Images\Logo2.png" />
+    <None Remove="Images\minimize.png" />
+    <None Remove="Images\minimize2.png" />
+    <None Remove="Images\minimize3.png" />
+    <None Remove="Images\search.png" />
+    <None Remove="Images\search2.png" />
+    <None Remove="Images\search3.png" />
+    <None Remove="Images\search4.png" />
+    <None Remove="Images\user4.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\minimize2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc2" />
+    <PackageReference Include="PDFsharp" Version="6.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\back-image.jpg" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\close2.png" />
+    <Resource Include="Images\close3.png" />
+    <Resource Include="Images\key.png" />
+    <Resource Include="Images\Logo2.png" />
+    <Resource Include="Images\minimize.png" />
+    <Resource Include="Images\minimize3.png" />
+    <Resource Include="Images\search.png" />
+    <Resource Include="Images\search2.png" />
+    <Resource Include="Images\search3.png" />
+    <Resource Include="Images\search4.png" />
+    <Resource Include="Images\user4.png" />
+  </ItemGroup>
+
+</Project>

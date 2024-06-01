@@ -1,0 +1,9 @@
+﻿<Application x:Class="NvvmFinal.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NvvmFinal"
+             StartupUri="/Views/HomePage.xaml">
+    <Application.Resources>
+        <ResourceDictionary Source="/Resources/StylesForButton.xaml"/>
+    </Application.Resources>
+</Application>

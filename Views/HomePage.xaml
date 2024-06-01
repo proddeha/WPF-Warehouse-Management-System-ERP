@@ -1,0 +1,259 @@
+﻿<Window x:Class="NvvmFinal.Views.HomePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NvvmFinal.Views"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        mc:Ignorable="d"
+        Title="HomePage" 
+        Height="1000" 
+        Width="1500"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        MouseDown="Window_MouseDown"
+        xmlns:viewModel="clr-namespace:NvvmFinal.ViewModels"
+        >
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        
+        <DataTemplate DataType="{x:Type viewModel:HomePageVM}">
+            <local:HomePageView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:CustomerVM}">
+            <local:NewCustomerView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModel:VendorsVM}">
+            <local:VendorsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ProductsVM}">
+            <local:ProductsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:SalesManVM}">
+            <local:SalesManView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:InvoiceVM}">
+            <local:InvoiceView/>
+        </DataTemplate>
+
+
+    </Window.Resources>
+
+    <Border CornerRadius="10"
+            BorderThickness="1"
+            >
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#000000" Offset="0.03"/>
+                <GradientStop Color="#121107" Offset="0.15"/>
+                <GradientStop Color="#302e12" Offset="0.35"/>
+                <GradientStop Color="#545120" Offset="0.75"/>
+                <GradientStop Color="#827d17" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="10,0,0,10"
+                    Grid.Column="0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                            <GradientStop Color="#121107" Offset="0"/>
+                            <GradientStop Color="#1b1c1c" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                Height="45"
+                                Margin="15,25,0,40"
+                                >
+                            <Image Source="\Images\Logo2.png" Height="50"/>
+                            <TextBlock Text="KVA Systems"
+                                   FontSize="25"
+                                   Foreground="AliceBlue"
+                                   FontWeight="Medium"
+                                   Margin="10,0,0,0"
+                                   FontFamily="Times New Roman"
+                                   VerticalAlignment="Center"
+                                   />
+
+                        </StackPanel>
+
+                        <RadioButton Style="{StaticResource menuBtn}"
+                                     Tag="aliceBlue"
+                                     Cursor="Hand"
+                                     Command="{Binding ShowHomeViewCmd}"
+                                     IsChecked="True">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Home" Style="{StaticResource menuBtnIcon}"/>
+                                <TextBlock Text="Dashboard" Style="{StaticResource menuBtnText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuBtn}"
+                                     Tag="aliceBlue"
+                                     Cursor="Hand"
+                                     
+                                     Command="{Binding ShowCustomerViewCmd}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="UserGroup" Style="{StaticResource menuBtnIcon}"/>
+                                <TextBlock Text="Customers" Style="{StaticResource menuBtnText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuBtn}"
+                                     Tag="aliceBlue"
+                                     Cursor="Hand"
+                                     Command="{Binding ShowSalesManViewCmd}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="SackDollar" Style="{StaticResource menuBtnIcon}"/>
+                                <TextBlock Text="SalesMan" Style="{StaticResource menuBtnText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuBtn}"
+                                     Tag="aliceBlue"
+                                     Cursor="Hand"
+                                     Command="{Binding ShowVendorsViewCmd}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Handshake" Style="{StaticResource menuBtnIcon}"/>
+                                <TextBlock Text="Vendors" Style="{StaticResource menuBtnText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuBtn}"
+                                     Tag="aliceBlue"
+                                     Cursor="Hand"
+                                     Command="{Binding ShowProductsViewCmd}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Boxes" Style="{StaticResource menuBtnIcon}"/>
+                                <TextBlock Text="Products" Style="{StaticResource menuBtnText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource menuBtn}"
+                                     Tag="aliceBlue"
+                                     Cursor="Hand"
+                                     Command="{Binding ShowInvoicesViewCmd}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="FileInvoice" Style="{StaticResource menuBtnIcon}"/>
+                                <TextBlock Text="Invoices" Style="{StaticResource menuBtnText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                        <Button Height="50"
+                                Background="#f2645a"
+                                Margin="40"
+                                BorderBrush="Transparent"
+                                x:Name="logOut"
+                                Click="logOut_Click">
+                            <Button.Content>
+                                <TextBlock Text="Log out"
+                                           FontSize="20"
+                                           FontWeight="SemiBold"
+                                           FontFamily="New Times"
+                                           ></TextBlock>
+                            </Button.Content>
+                            
+                            
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="0,10,10,0"
+                    Grid.Column="1">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="1,1" EndPoint="0,00">
+                            <GradientStop Color="#f5f2e6" Offset="0"/>
+                            <GradientStop Color="#e8e5d8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Height="30"
+                                Background="Transparent"
+                                x:Name="closeBtn"
+                                Click="Button_Click"
+                                BorderThickness="0"
+                            Grid.Column="4">
+                                    <Image Source="\Images\close3.png" Stretch="None"/>
+                                </Button>
+                                <Button Height="30"
+                                x:Name="mnmzBtn"
+                                Click="mnmzBtn_Click"
+                                BorderThickness="0"
+                            Grid.Column="2"
+                            FontWeight="Heavy"
+                            Cursor="Hand"
+                            Background="Transparent">
+                                    <Image Source="\Images\minimize3.png" Stretch="None"/>
+                                </Button>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center">
+                                <fa:IconImage Icon="{Binding Icon}"
+                                              Foreground="#121107"
+                                              Margin="35,0,10,0"
+                                              Height="20"
+                                              Width="22"/>
+                                <TextBlock Text="{Binding Caption}"
+                                           Foreground="#121107"
+                                           FontSize="18"
+                                           FontWeight="Medium"
+                                           VerticalAlignment="Center"/>
+                                
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1"/>
+
+                        </Grid>
+
+
+                        <ContentControl Content="{Binding ChildViewModel}" 
+                                        Grid.Row="2"
+                                        Margin="25"
+                                        x:Name="ContentBox">
+                        </ContentControl>
+
+
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

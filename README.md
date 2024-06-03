@@ -12,10 +12,9 @@ KVA Systems is a robust desktop application designed to streamline various busin
 4. **MVVM (Model-View-ViewModel)**: The architectural pattern employed to separate the development of the graphical user interface from the development of the business logic or back-end logic, making the code more maintainable and testable.
 5. **Visual Studio**: The integrated development environment (IDE) used for developing, debugging, and managing the project.
 6. **SQL Server**: Used as the database management system for storing and managing the application’s data, including customer information, product details, sales records, and vendor information.
-7. **Entity Framework**: An ORM (Object-Relational Mapping) framework used to interact with the SQL Server database, allowing developers to work with data using .NET objects.
-8. **WPF (Windows Presentation Foundation)**: Used for building the application’s graphical user interface, providing a rich set of controls, graphics, and data-binding capabilities.
-9. **LINQ (Language Integrated Query)**: Used for querying the data in a more readable and concise manner within the C# code.
-10. **Git**: Version control system used for tracking changes in the source code, facilitating collaboration among multiple developers.
+7. **WPF (Windows Presentation Foundation)**: Used for building the application’s graphical user interface, providing a rich set of controls, graphics, and data-binding capabilities.
+8. **LINQ (Language Integrated Query)**: Used for querying the data in a more readable and concise manner within the C# code.
+9. **Git**: Version control system used for tracking changes in the source code, facilitating collaboration among multiple developers.
 
 
 ## Features

@@ -1,7 +1,16 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
+# Set the default behavior, in case people don't have core.autocrlf set.
 * text=auto
+
+# Declare files that will always have CRLF line endings on checkout.
+*.cs text eol=crlf
+*.xaml text eol=crlf
+
+# Declare files that will always have LF line endings on checkout.
+*.sh text eol=lf
+*.config text eol=lf
 
 ###############################################################################
 # Set default behavior for command prompt diff.

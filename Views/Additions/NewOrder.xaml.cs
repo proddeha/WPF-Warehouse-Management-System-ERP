@@ -312,6 +312,7 @@ namespace NvvmFinal.Views.Additions
 
             HomePageView.Instance.calculateTotalCost();
             MessageBox.Show("Product Successfully Added To Cart");
+
         }
 
         private decimal initialPriceCqlt()

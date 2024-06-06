@@ -404,56 +404,60 @@ namespace NvvmFinal.Views.Additions
 
         private void UpdateStock(int productId, int quantity)
         {
-            SqlConnection connection = new SqlConnection(GetConnectionString());
-
-            try
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
-                connection.Open();
-
-                int safetyStockLevel = 0;
-                int reorderPoint = 0;
-                int currentStock = 0;
-
-                SqlCommand command = new SqlCommand("SELECT SafetyStockLevel FROM production.Product WHERE ProductID = @ProductID", connection);
-                command.Parameters.AddWithValue("@ProductID", productId);
-                safetyStockLevel = Convert.ToInt32(command.ExecuteScalar());
-
-                command = new SqlCommand("SELECT ReorderPoint FROM production.Product WHERE ProductID = @ProductID", connection);
-                command.Parameters.AddWithValue("@ProductID", productId);
-                reorderPoint = Convert.ToInt32(command.ExecuteScalar());
-
-                command = new SqlCommand("SELECT * FROM ProductSummary WHERE ProductID = @ProductID;", connection);
-                command.Parameters.AddWithValue("@ProductID", productId);
-                currentStock = Convert.ToInt32(command.ExecuteScalar());
-
-
-                if (currentStock - quantity < reorderPoint)
+                try
                 {
-                    SqlCommand ncommand = new SqlCommand("SELECT Name FROM production.Product WHERE ProductID = @ProductID", connection);
-                    ncommand.Parameters.AddWithValue("@ProductID", productId);
-                    string pname = ncommand.ExecuteScalar().ToString();
+                    connection.Open();
 
-                    System.Windows.MessageBox.Show("Το κατάστημα πρέπει να προμηθευτεί το προϊόν: " + pname);
-                    return;
-                }
-                else
-                {
+                    int reorderPoint = 0;
+                    int currentStock = 0;
+
+                    SqlCommand command = new SqlCommand("SELECT ReorderPoint FROM production.Product WHERE ProductID = @ProductID", connection);
+                    command.Parameters.AddWithValue("@ProductID", productId);
+                    reorderPoint = Convert.ToInt32(command.ExecuteScalar());
+
+                    command = new SqlCommand("SELECT Quantity FROM ProductSummary WHERE ProductID = @ProductID", connection);
+                    command.Parameters.AddWithValue("@ProductID", productId);
+                    currentStock = Convert.ToInt32(command.ExecuteScalar());
+
+                    if (currentStock - quantity < reorderPoint)
+                    {
+                        SqlCommand ncommand = new SqlCommand("SELECT Name FROM production.Product WHERE ProductID = @ProductID", connection);
+                        ncommand.Parameters.AddWithValue("@ProductID", productId);
+                        string pname = ncommand.ExecuteScalar().ToString();
+
+                        SqlCommand safetyStockCommand = new SqlCommand("SELECT SafetyStockLevel FROM production.Product WHERE ProductID = @ProductID", connection);
+                        safetyStockCommand.Parameters.AddWithValue("@ProductID", productId);
+                        int safetyStock = Convert.ToInt32(safetyStockCommand.ExecuteScalar());
+
+                        System.Windows.MessageBox.Show("The store must supply the product: " + pname);
+                        MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to purchase the product?", "Purchase Product", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+
+                            NewOrder newOrderForm = new NewOrder(productId, safetyStock);
+                            newOrderForm.Show();
+                        }
+                        return;
+                    }
+
                     SqlCommand updateCommand = new SqlCommand("UpdateStock", connection);
                     updateCommand.CommandType = CommandType.StoredProcedure;
                     updateCommand.Parameters.AddWithValue("@ProductID", productId);
                     updateCommand.Parameters.AddWithValue("@Quantity", quantity);
                     updateCommand.ExecuteNonQuery();
-                    System.Windows.MessageBox.Show("Η παραγγελία σου πραγματοποίηθηκε ");
 
+                    System.Windows.MessageBox.Show("Your order has been placed.");
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show("Error updating stock: " + ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show("Σφάλμα κατά την ενημέρωση του αποθέματος: " + ex.Message);
-            }
-            connection.Close();
-
         }
+
+
         private void InsertSalesOrder(Dictionary<int, (int Quantity, decimal ListPrice)> products)
         {
             string connectionString = GetConnectionString();
@@ -479,7 +483,7 @@ namespace NvvmFinal.Views.Additions
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.MessageBox.Show("Σφάλμα κατά την εισαγωγή της παραγγελίας: " + ex.Message);
+                    System.Windows.MessageBox.Show("Error entering order: " + ex.Message);
                 }
             }
         }
@@ -511,7 +515,7 @@ namespace NvvmFinal.Views.Additions
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.MessageBox.Show("Σφάλμα κατά την εισαγωγή της παραγγελίας: " + ex.Message);
+                    System.Windows.MessageBox.Show("Error entering order: " + ex.Message);
                 }
             }
         }
@@ -544,7 +548,7 @@ namespace NvvmFinal.Views.Additions
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Απέτυχε η ανάκτηση του ShipMethodID. Σφάλμα: {ex.Message}");
+                System.Windows.MessageBox.Show($" ShipMethodID Failed. Error: {ex.Message}");
             }
 
             return id;
@@ -639,7 +643,7 @@ namespace NvvmFinal.Views.Additions
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Απέτυχε η ανάκτηση του ProductID. Σφάλμα: {ex.Message}");
+                System.Windows.MessageBox.Show($"ProductID Not Found. Error: {ex.Message}");
             }
 
             return productID;
@@ -683,7 +687,7 @@ namespace NvvmFinal.Views.Additions
             }
             else
             {
-                System.Windows.MessageBox.Show("Το προϊόν δεν βρέθηκε.");
+                System.Windows.MessageBox.Show("Product Not Found.");
             }
 
         }

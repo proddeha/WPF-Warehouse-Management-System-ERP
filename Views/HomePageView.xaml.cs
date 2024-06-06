@@ -1,18 +1,13 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using NvvmFinal.ViewModels;
 using NvvmFinal.Views.Additions;
 //using PdfSharp.Charting;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Windows.Data;
 
 
 namespace NvvmFinal.Views
@@ -21,7 +16,7 @@ namespace NvvmFinal.Views
     {
         private int selectedProductID;
         public static HomePageView Instance { get; private set; }
-        public bool IsSelected { get;set; }
+        public bool IsSelected { get; set; }
         public HomePageView()
         {
             InitializeComponent();
@@ -40,6 +35,7 @@ namespace NvvmFinal.Views
             calculateTotalCost();
             statusCb.SelectedIndex = 0;
             OpenOrdersLoad();
+
         }
 
         private void LoadData()
@@ -341,10 +337,10 @@ namespace NvvmFinal.Views
                 MainTable.Columns.Add("Tax", typeof(decimal));
                 MainTable.Columns.Add("Freight", typeof(decimal));
                 MainTable.Columns.Add("VendorID", typeof(int));
-                
+
 
             }
-            
+
 
         }
         private void NewOrder_Click(object sender, RoutedEventArgs e)
@@ -558,11 +554,11 @@ namespace NvvmFinal.Views
                     if (item is DataRowView rowView)
                     {
                         string readVendor = rowView["Vendor"].ToString();
-                        if(vendorName==readVendor)
+                        if (vendorName == readVendor)
                         {
-                        int productID = Convert.ToInt32(rowView["ProductID"]);
-                        int quantity = Convert.ToInt32(rowView["Quantity"]);
-                        productsAndQuantities.Add(productID, quantity);
+                            int productID = Convert.ToInt32(rowView["ProductID"]);
+                            int quantity = Convert.ToInt32(rowView["Quantity"]);
+                            productsAndQuantities.Add(productID, quantity);
                         }
                     }
 
@@ -628,7 +624,7 @@ namespace NvvmFinal.Views
                         if (item is DataRowView dataRowView && !dataRowView.IsNew)
                         {
                             string readVendor = dataRowView["Vendor"].ToString();
-                            if (readVendor==vendor)
+                            if (readVendor == vendor)
                             {
                                 int.TryParse(dataRowView["ShippingID"].ToString(), out shippingID);
                                 int.TryParse(dataRowView["VendorID"].ToString(), out vendorID);
@@ -660,8 +656,8 @@ namespace NvvmFinal.Views
             if (result == MessageBoxResult.Yes)
             {
                 CheckForVendors(true);
-            }           
-            
+            }
+
         }
         private void archiveOrderBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -685,11 +681,11 @@ namespace NvvmFinal.Views
                     SqlCommand command = new SqlCommand(query, connection);
                     command = new SqlCommand(query, connection);
                     using (SqlDataReader reader = command.ExecuteReader())
-                    while (reader.Read())
-                    {
-                       orderID  = reader.GetInt32(0).ToString();
-                    }
-                    
+                        while (reader.Read())
+                        {
+                            orderID = reader.GetInt32(0).ToString();
+                        }
+
 
                     connection.Close();
                 }
@@ -734,10 +730,10 @@ namespace NvvmFinal.Views
                 {
                     if (vendor.Value > 1)
                     {
-                            
+
                         insertHeader(vendor.Key);
                         PurchaseOrderDetail(GetSelectedProductsAndQuantities(vendor.Key));
-                        changeOrderStatus(can_execute,2,selectMaxOrderID());
+                        changeOrderStatus(can_execute, 2, selectMaxOrderID());
 
                     }
                     else
@@ -745,7 +741,7 @@ namespace NvvmFinal.Views
 
                         insertHeader(vendor.Key);
                         PurchaseOrderDetail(GetSelectedProductsAndQuantities(vendor.Key));
-                        changeOrderStatus(can_execute,2,selectMaxOrderID());
+                        changeOrderStatus(can_execute, 2, selectMaxOrderID());
                     }
 
                 }
@@ -756,28 +752,28 @@ namespace NvvmFinal.Views
                 Debug.WriteLine($"Exception: {ex}");
             }
         }
-        public void changeOrderStatus(bool execute,int orderStatus,string orderID)
+        public void changeOrderStatus(bool execute, int orderStatus, string orderID)
         {
             if (execute)
-            { 
-            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
             {
-                try
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
                 {
-                    connection.Open();
+                    try
+                    {
+                        connection.Open();
 
-                    SqlCommand cmd = new SqlCommand("ChangingStatus", connection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@purchaseID", orderID);
-                    cmd.Parameters.AddWithValue("@statusid", orderStatus);
+                        SqlCommand cmd = new SqlCommand("ChangingStatus", connection);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@purchaseID", orderID);
+                        cmd.Parameters.AddWithValue("@statusid", orderStatus);
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Windows.MessageBox.Show("Σφάλμα κατά την εισαγωγή της παραγγελίας: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    System.Windows.MessageBox.Show("Σφάλμα κατά την εισαγωγή της παραγγελίας: " + ex.Message);
-                }
-            }
             }
         }
         private void OpenOrdersLoad()
@@ -786,7 +782,7 @@ namespace NvvmFinal.Views
             if (statusCb.SelectedItem is ComboBoxItem selectedItem)
             {
                 orderStatus = selectedItem.Content.ToString();
-                
+
             }
             using (SqlConnection con = new SqlConnection(GetConnectionString()))
             {
@@ -797,14 +793,14 @@ namespace NvvmFinal.Views
                     SqlCommand cmd = new SqlCommand(query, con);
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
-                   if (!dt.Columns.Contains("Check"))
-                   {
+                    if (!dt.Columns.Contains("Check"))
+                    {
                         dt.Columns.Add(new DataColumn("Check", typeof(bool)));
-                   }
+                    }
                     adapter.Fill(dt);
                     orderGrid.ItemsSource = dt.DefaultView;
 
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -896,15 +892,15 @@ namespace NvvmFinal.Views
             {
                 orderStatus = selectedItem.Content.ToString();
             }
-            if (orderStatus =="Approved")
+            if (orderStatus == "Approved")
             {
                 completeOrderBtn.Visibility = Visibility.Visible;
-                acceptRejectPanel.Visibility = Visibility.Collapsed; 
+                acceptRejectPanel.Visibility = Visibility.Collapsed;
             }
             else
             {
                 completeOrderBtn.Visibility = Visibility.Collapsed;
-                acceptRejectPanel.Visibility = Visibility.Visible; 
+                acceptRejectPanel.Visibility = Visibility.Visible;
             }
         }
         private int pendingOrders()
@@ -927,7 +923,7 @@ namespace NvvmFinal.Views
                     }
 
                 }
-                catch(SqlException ex)
+                catch (SqlException ex)
                 {
                     System.Windows.MessageBox.Show(ex.ToString());
                 }
@@ -988,6 +984,7 @@ namespace NvvmFinal.Views
             MessageBoxResult result = System.Windows.MessageBox.Show("Are You Sure?", "Complete Order", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
+                AddQuantity();
                 ForEachOrderGrid(4);
                 OpenOrdersLoad();
             }
@@ -1001,9 +998,82 @@ namespace NvvmFinal.Views
                 OpenOrdersLoad();
             }
         }
+        private void AddQuantity()
+        {
+            using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+            {
+                try
+                {
+                    connection.Open();
+
+                    foreach (var item in orderGrid.Items)
+                    {
+                        if (item is DataRowView row)
+                        {
+                            if (row["Check"] is bool isChecked && isChecked)
+                            {
+                                string purchaseOrderID = row["PurchaseOrderID"].ToString();
+
+                                SqlCommand getQuantityCommand = new SqlCommand(
+                                    "SELECT ProductID, OrderQty FROM purchasing.purchaseorderdetail WHERE PurchaseOrderID = @PurchaseOrderID",
+                                    connection
+                                );
+                                getQuantityCommand.Parameters.AddWithValue("@PurchaseOrderID", purchaseOrderID);
+
+                                int productID = 0;
+                                int quantity = 0;
+                                using (SqlDataReader reader = getQuantityCommand.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        productID = reader.GetInt32(0);
+                                        quantity = reader.GetInt16(1);
+                                    }
+                                    else
+                                    {
+                                        System.Windows.MessageBox.Show($"No details found for PurchaseOrderID {purchaseOrderID}.");
+                                        continue;
+                                    }
+                                }
+                                SqlCommand lcommand = new SqlCommand(
+                                    "SELECT TOP 1 LocationID FROM production.ProductInventory WHERE ProductID = @ProductID ORDER BY Quantity ASC",
+                                    connection
+                                );
+                                lcommand.Parameters.AddWithValue("@ProductID", productID);
+
+                                int locationID = 0;
+                                using (SqlDataReader reader = lcommand.ExecuteReader())
+                                {
+                                    if (reader.Read())
+                                    {
+                                        locationID = reader.GetInt16(0);
+                                    }
+                                    else
+                                    {
+                                        System.Windows.MessageBox.Show($"No warehouses found for ProductID {productID}.");
+                                        continue;
+                                    }
+                                }
+                                SqlCommand updateCommand = new SqlCommand("AddStockQuantity", connection);
+                                updateCommand.CommandType = CommandType.StoredProcedure;
+                                updateCommand.Parameters.AddWithValue("@ProductID", productID);
+                                updateCommand.Parameters.AddWithValue("@LocationID", locationID);
+                                updateCommand.Parameters.AddWithValue("@Quantity", quantity);
+                                updateCommand.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                }
+                connection.Close();
+            }
+        }
         private void purchaseID_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
             using (SqlConnection con = new SqlConnection(GetConnectionString()))
             {
                 string orderStatus = null;
@@ -1019,7 +1089,7 @@ namespace NvvmFinal.Views
                     SqlCommand cmd = new SqlCommand(query, con);
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
-                    
+
                     if (!dt.Columns.Contains("Check"))
                     {
                         dt.Columns.Add(new DataColumn("Check", typeof(bool)));

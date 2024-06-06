@@ -32,8 +32,6 @@ namespace NvvmFinal.Views
         {
             WindowState = WindowState.Minimized;
 
-
-
         }
 
         private void logOut_Click(object sender, RoutedEventArgs e)

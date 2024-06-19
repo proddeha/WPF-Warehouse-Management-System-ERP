@@ -397,7 +397,6 @@
                                         Height="30"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Center"
-                               
                                x:Name="myTextBlock">
                     </TextBlock>
                     </StackPanel>

@@ -15,6 +15,7 @@
         WindowStyle="None"
         MouseDown="Window_MouseDown"
         xmlns:viewModel="clr-namespace:NvvmFinal.ViewModels"
+        Closing="Window_Closing" Closed="Window_Closed"
         >
 
     <Window.DataContext>

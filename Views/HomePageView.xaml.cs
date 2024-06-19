@@ -34,7 +34,7 @@ namespace NvvmFinal.Views
             int selectedProductID = this.selectedProductID;
             calculateTotalCost();
             statusCb.SelectedIndex = 0;
-            OpenOrdersLoad();
+            OpenOrdersLoad();            
 
         }
 

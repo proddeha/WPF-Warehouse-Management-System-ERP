@@ -62,7 +62,7 @@ namespace NvvmFinal.Views
                         try
                         {
                             con.Open();
-                            string query = $"SELECT TOP 1000 soh.CustomerID, pp.LastName, pp.FirstName, soh.SalesOrderNumber,sod.ProductID,TotalDue " +
+                            string query = $"SELECT DISTINCT TOP 1000 soh.CustomerID, pp.LastName, pp.FirstName, soh.SalesOrderNumber,sod.ProductID,TotalDue " +
                                            $"FROM sales.SalesOrderHeader AS soh " +
                                            $"JOIN sales.SalesOrderDetail AS sod ON soh.SalesOrderID = sod.SalesOrderID " +
                                            $"JOIN sales.Customer AS sc ON soh.CustomerID = sc.CustomerID " +

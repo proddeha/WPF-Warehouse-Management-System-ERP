@@ -222,7 +222,7 @@ namespace NvvmFinal.Views.Additions
         private void shippingCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            string selectedShipMethod = shippingCb.SelectedItem.ToString();
+            string? selectedShipMethod = shippingCb.SelectedItem.ToString();
             string connectionString = GetConnectionString();
 
             try
@@ -255,6 +255,14 @@ namespace NvvmFinal.Views.Additions
             LoadDataToGridView();
             shippingCostBlk.Text = CqltCost().ToString();
             totalCostBlk.Text = finalPriceCqlt().ToString();
+
+            categoryCB.SelectionChanged -= categoryCB_SelectionChanged;
+
+            categoryCB.SelectedIndex = -1;
+
+            categoryCB.SelectionChanged += categoryCB_SelectionChanged;
+            productCb.Items.Clear();
+            quantity.Text = "";
         }
 
         private decimal initialPriceCqlt()
@@ -435,7 +443,6 @@ namespace NvvmFinal.Views.Additions
                         MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to purchase the product?", "Purchase Product", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
-
                             NewOrder newOrderForm = new NewOrder(productId, safetyStock);
                             newOrderForm.Show();
                         }
@@ -573,6 +580,7 @@ namespace NvvmFinal.Views.Additions
             }
             catch (Exception ex)
             {
+                
                 System.Windows.MessageBox.Show("Same Product Exists 2 Times In The Cart\n\nTry Changing The Quantity");
             }
 
@@ -653,8 +661,9 @@ namespace NvvmFinal.Views.Additions
 
         private void order_Click(object sender, RoutedEventArgs e)
         {
-            string selectedProduct = productCb.SelectedItem.ToString();
-            int productID = GetProductID(selectedProduct);
+            List<DataRowView> rowsToDelete = new List<DataRowView>();
+            //string selectedProduct = productCb.SelectedItem.ToString();
+            int productID = 1;
 
             if (productID != -1)
             {
@@ -683,12 +692,26 @@ namespace NvvmFinal.Views.Additions
 
                 InsertSalesHeader(customerID, addressID, shipMethodID, territoryID, creditID, freight, tax);
                 InsertSalesOrder(GetSelectedProductsAndQuantities());
+                this.Close();
 
             }
             else
             {
                 System.Windows.MessageBox.Show("Product Not Found.");
             }
+
+            foreach (var item in ViewGrid.Items)
+            {
+                if (item is DataRowView selectedRow)
+                {
+                    rowsToDelete.Add(selectedRow);
+                }
+            }
+            foreach (var dataRowView in rowsToDelete)
+            {
+                dataRowView.Row.Delete();
+            }
+
 
         }
 

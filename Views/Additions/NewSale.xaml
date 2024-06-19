@@ -330,8 +330,6 @@
                                                     <Setter Property="BorderThickness" Value="0,0,1,0"/>
                                                     <Setter Property="MaxWidth" Value="300"/>
                                                 </Style>
-
-
                                             </DataGrid.Resources>
                                         </DataGrid>
                                         <Button Height="30" 
@@ -369,7 +367,7 @@
                     Click="order_Click">
                     <StackPanel  Orientation="Horizontal" Width="160" >
                         <fa:IconImage Icon="Check" Width="15" Height="15" Foreground="AliceBlue"/>
-                        <TextBlock Text="COMPLETE ORDER" VerticalAlignment="Center" Margin="10,0,0,0"
+                        <TextBlock Text="COMPLETE SALE" VerticalAlignment="Center" Margin="10,0,0,0"
                                                        FontFamily="Times New Roman"
                                                        FontSize="15"
                                                        Foreground="AliceBlue"/>

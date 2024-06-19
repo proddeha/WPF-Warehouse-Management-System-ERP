@@ -264,7 +264,7 @@
                                                 HorizontalAlignment="Center">
                                         <Button
                                             Height="30"
-                                            Width="200" Click="Button_Click">
+                                            Width="200" Click="Button_Click" x:Name="addToCartButton">
                                             <StackPanel  Orientation="Horizontal" Width="160" >
                                                 <fa:IconImage Icon="CartShopping" Width="15" Height="15" Foreground="AliceBlue"/>
                                                 <TextBlock Text="ADD TO CART" VerticalAlignment="Center" Margin="30,0,0,0"

@@ -34,6 +34,10 @@ namespace NvvmFinal.Views.Additions
             this.productID=productID;
             this.quantity = quantity;
             TotalCost.DataContext = mainViewModel;
+            shippingCb.IsEnabled = false;
+            addToCartButton.IsEnabled = false;
+            order.IsEnabled = false;
+
             setCategory();
             LoadData3();
             LoadVendors();
@@ -242,6 +246,8 @@ namespace NvvmFinal.Views.Additions
 
             string selectedShipMethod = shippingCb.SelectedItem.ToString();
             string connectionString = GetConnectionString();
+            addToCartButton.IsEnabled = true;
+            order.IsEnabled = true;
 
             try
             {
@@ -272,7 +278,6 @@ namespace NvvmFinal.Views.Additions
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             decimal cost = Convert.ToDecimal(totalCostBlk.Text);
             foreach (var item in ViewGrid.Items)
             {
@@ -312,6 +317,7 @@ namespace NvvmFinal.Views.Additions
 
             HomePageView.Instance.calculateTotalCost();
             MessageBox.Show("Product Successfully Added To Cart");
+            this.Close();
 
         }
 
@@ -704,6 +710,7 @@ namespace NvvmFinal.Views.Additions
                 PurchaseOrderHeader(vendorID, shipMethodID, freight, tax);
                 PurchaseOrderDetail(GetSelectedProductsAndQuantities());
                 MessageBox.Show("Product Approved ");
+                this.Close();
             }
             else
             {
@@ -752,6 +759,7 @@ namespace NvvmFinal.Views.Additions
         private void VendorCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string vendorName = VendorCB.SelectedItem.ToString();
+            shippingCb.IsEnabled = true;
 
             //
             //MessageBox.Show(vendorName);
